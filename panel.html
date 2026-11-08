@@ -1,0 +1,1289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KIORAxAUTO</title>
+  <style>
+/* ═══════════════════════════════════════════════════
+   KIORAxAUTO — Premium UI Design System v2
+   ═══════════════════════════════════════════════════ */
+
+:root {
+  /* Surfaces */
+  --s0: #05060f;
+  --s1: rgba(12, 13, 26, 0.97);
+  --s2: rgba(18, 20, 40, 0.80);
+  --s3: rgba(26, 28, 56, 0.65);
+  --s4: rgba(34, 37, 70, 0.50);
+
+  /* Borders */
+  --b0: rgba(255, 255, 255, 0.04);
+  --b1: rgba(255, 255, 255, 0.08);
+  --b2: rgba(255, 255, 255, 0.13);
+  --b-accent: rgba(139, 92, 246, 0.28);
+  --b-gold: rgba(34, 211, 238, 0.28);
+  --b-cyan: rgba(6, 182, 212, 0.22);
+
+  /* Accent palette */
+  --a-violet: #8b5cf6;
+  --a-violet-glow: rgba(139, 92, 246, 0.35);
+  --a-cyan: #06b6d4;
+  --a-cyan-glow: rgba(6, 182, 212, 0.30);
+  --a-gold: #22d3ee;
+  --a-gold-glow: rgba(34, 211, 238, 0.35);
+  --a-green: #10b981;
+  --a-green-glow: rgba(16, 185, 129, 0.30);
+  --a-red: #f43f5e;
+  --a-red-glow: rgba(244, 63, 94, 0.30);
+
+  /* Gradients */
+  --g-brand: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  --g-gold: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  --g-btn: linear-gradient(135deg, #7c3aed, #0e7490);
+  --g-btn-hover: linear-gradient(135deg, #8b5cf6, #0891b2);
+  --g-btn-alt: rgba(255, 255, 255, 0.05);
+  --g-success: linear-gradient(135deg, #059669, #10b981);
+  --g-danger: linear-gradient(135deg, #be123c, #f43f5e);
+
+  /* Text */
+  --t1: #f1f5f9;
+  --t2: #94a3b8;
+  --t3: #475569;
+  --t-ok: #34d399;
+  --t-err: #fb7185;
+  --t-warn: #fbbf24;
+
+  /* Misc */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --mono: 'SF Mono', 'JetBrains Mono', Consolas, monospace;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 0 1px var(--b-accent), 0 0 24px var(--a-violet-glow);
+
+  /* Legacy compat */
+  --bg-1: #05060f;
+  --panel: var(--s1);
+  --line: var(--b1);
+  --text: var(--t1);
+  --muted: var(--t2);
+  --ok: var(--t-ok);
+  --err: var(--t-err);
+  --btn: var(--g-btn);
+  --btn-hover: var(--g-btn-hover);
+  --chip: var(--s3);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ── Body / Background ─────────────────────────────── */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 10%, rgba(139, 92, 246, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(5, 6, 15, 1) 40%, rgba(8, 9, 20, 1) 100%);
+  color: var(--t1);
+  font: 13px/1.5 var(--sans);
+  padding: 16px;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 40% 30% at 15% 5%, rgba(139, 92, 246, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 25% at 85% 15%, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: auroraShift 18s ease-in-out infinite alternate;
+}
+
+@keyframes auroraShift {
+  0%   { opacity: 0.7; transform: scale(1) translateX(0); }
+  50%  { opacity: 1;   transform: scale(1.05) translateX(2%); }
+  100% { opacity: 0.8; transform: scale(1) translateX(-1%); }
+}
+
+/* ── Wrap / Main Container ────────────────────────── */
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: var(--radius-xl);
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px rgba(139, 92, 246, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ───────────────────────────────────────── */
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--b0);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(6, 182, 212, 0.05) 100%);
+  position: relative;
+}
+
+.head::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 20px; right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.4), rgba(6, 182, 212, 0.3), transparent);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.brand img {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+}
+
+.brand span {
+  background: var(--g-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.target {
+  color: var(--t3);
+  font-size: 11px;
+  letter-spacing: 0.3px;
+}
+
+/* ── Status Bar ───────────────────────────────────── */
+.status {
+  margin: 10px 16px;
+  padding: 9px 14px;
+  border: 1px solid var(--b1);
+  border-radius: var(--radius);
+  color: var(--t2);
+  background: var(--s3);
+  font-size: 12px;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.status.ok  { color: var(--t-ok);  border-color: rgba(52, 211, 153, 0.25); background: rgba(16, 185, 129, 0.08); }
+.status.err { color: var(--t-err); border-color: rgba(251, 113, 133, 0.25); background: rgba(244, 63, 94, 0.08); }
+
+/* ── Tab Navigation ───────────────────────────────── */
+.nerona-tabs {
+  display: flex;
+  gap: 0;
+  padding: 8px 16px 0;
+  border-bottom: 1px solid var(--b0);
+  background: transparent;
+  position: relative;
+}
+
+.nerona-tab {
+  padding: 9px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--t3);
+  cursor: pointer;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+  user-select: none;
+}
+
+.nerona-tab:hover {
+  color: var(--t2);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nerona-tab.active {
+  color: var(--t1);
+  border-bottom-color: var(--a-violet);
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.nerona-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 2px;
+  background: var(--g-brand);
+  border-radius: 2px 2px 0 0;
+}
+
+.nerona-page { display: none; }
+.nerona-page.active { display: block; }
+
+/* ── Zone Titles ──────────────────────────────────── */
+.nerona-zone-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--t3);
+  padding: 14px 20px 6px;
+}
+
+/* ── Grid / Card Layout ───────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 12px 16px 18px;
+}
+
+.card {
+  border: 1px solid var(--b1);
+  border-radius: var(--radius-lg);
+  background: var(--s2);
+  padding: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.035) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.card:hover {
+  border-color: var(--b-accent);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(139, 92, 246, 0.08);
+  transform: translateY(-1px);
+}
+
+.card h3 {
+  margin: 0 0 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: var(--g-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Mode Toggle ──────────────────────────────────── */
+.mode {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius);
+  border: 1px solid var(--b0);
+}
+
+.mode button {
+  flex: 1;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 8px;
+  background: transparent;
+  color: var(--t3);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode button:hover:not(.active) {
+  color: var(--t2);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mode button.active {
+  background: var(--g-btn);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.25), 0 0 0 1px rgba(139, 92, 246, 0.15);
+}
+
+/* ── Row ──────────────────────────────────────────── */
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.row:last-child { margin-bottom: 0; }
+
+/* ── Inputs ───────────────────────────────────────── */
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--b1);
+  border-radius: var(--radius);
+  background: rgba(5, 6, 15, 0.7);
+  color: var(--t1);
+  padding: 9px 12px;
+  font: 12px/1.4 var(--sans);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(8, 10, 22, 0.9);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12), 0 0 0 1px rgba(139, 92, 246, 0.2);
+}
+
+input::placeholder { color: var(--t3); }
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23475569'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+/* ── Buttons ──────────────────────────────────────── */
+.btn {
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--g-btn);
+  color: #fff;
+  cursor: pointer;
+  font: 700 12px/1 var(--sans);
+  padding: 9px 14px;
+  white-space: nowrap;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.25);
+  letter-spacing: 0.2px;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--g-btn-hover);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn:hover::before { opacity: 1; }
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 8px rgba(124, 58, 237, 0.2);
+}
+
+.btn-alt {
+  background: var(--s3) !important;
+  border: 1px solid var(--b1) !important;
+  box-shadow: none !important;
+  color: var(--t2) !important;
+}
+
+.btn-alt:hover {
+  border-color: var(--b2) !important;
+  background: var(--s4) !important;
+  color: var(--t1) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
+}
+
+/* ── Log List ─────────────────────────────────────── */
+.log-list {
+  border: 1px solid var(--b0);
+  border-radius: var(--radius);
+  padding: 8px;
+  background: rgba(5, 6, 15, 0.6);
+  max-height: 200px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.2) transparent;
+}
+
+.log-list::-webkit-scrollbar { width: 4px; }
+.log-list::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 4px;
+}
+
+.log-item {
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--b0);
+  color: var(--t2);
+  font-size: 11px;
+  word-break: break-word;
+  line-height: 1.4;
+}
+.log-item:last-child { border-bottom: 0; }
+
+/* Premium log item enhanced */
+.log-item-enhanced {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--b0);
+  font-size: 11px;
+  line-height: 1.3;
+  transition: background 0.15s ease;
+  border-radius: 6px;
+}
+.log-item-enhanced:hover { background: rgba(255,255,255,0.025); }
+.log-item-enhanced:last-child { border-bottom: 0; }
+
+.log-ts { color: var(--t3); font-size: 9px; font-family: var(--mono); white-space: nowrap; min-width: 42px; }
+.log-card { color: var(--t1); font-family: var(--mono); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.log-expiry, .log-cvc { color: var(--t3); font-size: 9px; font-family: var(--mono); white-space: nowrap; }
+
+.log-badge { display: inline-block; padding: 2px 6px; border-radius: 5px; font-size: 8px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; white-space: nowrap; }
+.log-badge.interceptor { background: rgba(6,182,212,0.10); color: #06b6d4; border: 1px solid rgba(6,182,212,0.2); }
+.log-badge.network { background: rgba(139,92,246,0.10); color: #a78bfa; border: 1px solid rgba(139,92,246,0.2); }
+.log-badge.auto-hitter { background: rgba(245,158,11,0.10); color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+.log-badge.relay { background: rgba(167,139,250,0.10); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
+.log-badge.unknown { background: rgba(100,116,139,0.10); color: var(--t3); border: 1px solid var(--b0); }
+
+.log-response { font-weight: 800; font-size: 10px; text-transform: uppercase; white-space: nowrap; }
+.log-response.success { color: var(--t-ok); }
+.log-response.decline { color: var(--t-err); }
+.log-response.attempt { color: var(--t-warn); }
+.log-response.three_ds { color: #c084fc; }
+.log-response.unknown { color: var(--t3); }
+
+/* ── Switch Row ───────────────────────────────────── */
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  color: var(--t2);
+  border-bottom: 1px solid var(--b0);
+  font-size: 12px;
+  transition: background 0.15s ease;
+}
+.switch-row:last-child { border-bottom: 0; }
+.switch-row label:first-child { cursor: pointer; flex: 1; }
+
+/* ── iOS Toggle ───────────────────────────────────── */
+.ios-toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px; height: 22px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.ios-toggle input { display: none; }
+.ios-slider {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid var(--b1);
+  border-radius: 999px;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.ios-slider::before {
+  content: '';
+  position: absolute;
+  height: 16px; width: 16px;
+  left: 2px; top: 2px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.ios-toggle input:checked + .ios-slider {
+  background: var(--a-violet);
+  border-color: var(--a-violet);
+  box-shadow: 0 0 10px var(--a-violet-glow);
+}
+.ios-toggle input:checked + .ios-slider::before {
+  transform: translateX(18px);
+}
+
+/* ── Foot ─────────────────────────────────────────── */
+.foot {
+  position: sticky;
+  bottom: 0;
+  padding: 12px 20px 16px;
+  background: linear-gradient(to top, rgba(5,6,15,0.98) 70%, transparent);
+  border-top: 1px solid var(--b0);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  z-index: 10;
+}
+
+.start-btn {
+  min-width: 140px;
+  font-size: 13px;
+  padding: 11px 24px;
+  border-radius: 999px !important;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35) !important;
+}
+
+.start-btn.running {
+  background: var(--g-danger) !important;
+  box-shadow: 0 4px 20px rgba(244, 63, 94, 0.40) !important;
+  animation: startPulse 2s ease-in-out infinite;
+}
+
+@keyframes startPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(244,63,94,0.35) !important; }
+  50%       { box-shadow: 0 4px 32px rgba(244,63,94,0.55) !important; }
+}
+
+/* ── Tools Panel ──────────────────────────────────── */
+.nerona-tools-panel { padding: 0 16px 20px; display: grid; gap: 14px; }
+.nerona-tools-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding-top: 4px; }
+.nerona-tools-title { font-size: 12px; font-weight: 800; color: var(--t1); letter-spacing: 0.6px; text-transform: uppercase; }
+.nerona-tools-note { color: var(--t3); font-size: 11px; line-height: 1.4; margin-top: 3px; }
+.nerona-tools-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.nerona-proxy-grid { grid-template-columns: minmax(300px, 1.2fr) minmax(240px, .8fr); }
+
+.nerona-version-pill {
+  border: 1px solid var(--b-accent);
+  color: var(--a-violet);
+  background: rgba(139, 92, 246, 0.08);
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.12);
+}
+
+/* ── Tool Cards ───────────────────────────────────── */
+.tool-card {
+  border: 1px solid var(--b1);
+  border-radius: var(--radius-lg);
+  background: var(--s2);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+  padding: 14px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.tool-card:hover {
+  border-color: var(--b-accent);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(139, 92, 246, 0.08);
+  transform: translateY(-1px);
+}
+
+.tool-card h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--g-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.tool-pill {
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--a-cyan);
+  background: rgba(6, 182, 212, 0.10);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  -webkit-text-fill-color: unset;
+}
+
+.tool-mini-note { color: var(--t3); font-size: 10.5px; line-height: 1.45; }
+.tool-field { display: grid; gap: 5px; }
+.tool-field label { color: var(--t3); font-size: 9px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; }
+
+.tool-card input, .tool-card select {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--b1);
+  background: rgba(5, 6, 15, 0.7);
+  color: var(--t1);
+  padding: 9px 12px;
+  outline: none;
+  font-size: 11px;
+  transition: all 0.2s ease;
+}
+.tool-card input:focus, .tool-card select:focus {
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.10);
+}
+
+.tool-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tool-actions.single { grid-template-columns: 1fr; }
+
+.tool-result {
+  margin-top: auto;
+  min-height: 60px;
+  max-height: 120px;
+  overflow: auto;
+  white-space: pre-wrap;
+  border: 1px solid var(--b0);
+  border-radius: var(--radius);
+  background: rgba(5, 6, 15, 0.55);
+  color: var(--t2);
+  padding: 9px 11px;
+  font: 10.5px/1.4 var(--mono);
+  scrollbar-width: thin;
+}
+
+/* ── Live Status ──────────────────────────────────── */
+.nerona-live-status {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  border-radius: var(--radius);
+  background: rgba(5, 6, 15, 0.55);
+  border: 1px solid var(--b0);
+}
+
+.nerona-live-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--t3);
+}
+
+.nerona-live-row strong {
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--mono);
+  color: var(--t1);
+  font-size: 11px;
+  text-align: right;
+  font-weight: 600;
+}
+
+.nerona-live-row strong.ok  { color: var(--t-ok);  }
+.nerona-live-row strong.err { color: var(--t-err); }
+
+/* ── Gateway Status ───────────────────────────────── */
+.gateway-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--t3);
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  background: var(--s3);
+  border: 1px solid var(--b0);
+  margin-top: 8px;
+}
+.gateway-status .badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 9px;
+  background: rgba(139, 92, 246, 0.12);
+  color: var(--a-violet);
+  border: 1px solid var(--b-accent);
+  letter-spacing: 0.4px;
+}
+
+/* ── Theme Row ────────────────────────────────────── */
+.theme-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.theme-row + .theme-row { margin-top: 8px; }
+.fx-control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+
+#themeStatus, #fxStatus {
+  min-height: 24px;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 11px;
+  color: var(--t3);
+  background: var(--s3);
+  border: 1px solid var(--b0);
+  margin-top: 6px;
+}
+
+/* ── Local Board ──────────────────────────────────── */
+.local-board {
+  margin-top: auto;
+  display: grid;
+  gap: 5px;
+  max-height: 128px;
+  overflow: auto;
+  border: 1px solid var(--b0);
+  border-radius: var(--radius);
+  background: rgba(5, 6, 15, 0.5);
+  padding: 8px;
+}
+
+.local-board-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--t2);
+  font-size: 11px;
+  border-bottom: 1px dashed var(--b0);
+  padding-bottom: 4px;
+}
+.local-board-row:last-child { border-bottom: 0; padding-bottom: 0; }
+
+/* ── Success Preview Toast ────────────────────────── */
+.nerona-success-preview {
+  position: fixed;
+  left: 50%;
+  top: 70px;
+  transform: translate(-50%, -18px) scale(.98);
+  min-width: 330px;
+  max-width: 440px;
+  z-index: 999999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .22s ease, transform .25s ease;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: var(--radius-xl);
+  background: rgba(10, 11, 24, 0.90);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 24px 70px rgba(0,0,0,.5), 0 0 30px rgba(139, 92, 246, 0.20);
+  color: var(--t1);
+  padding: 18px 20px 16px;
+  overflow: hidden;
+}
+.nerona-success-preview.show { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.nerona-success-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--g-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  border: 1px solid rgba(139,92,246,0.3);
+  background-clip: unset;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.nerona-success-title {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 4px;
+  background: var(--g-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nerona-success-sub { color: var(--t2); font-size: 12px; }
+.nerona-success-bar { height: 2px; margin-top: 14px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.08); }
+.nerona-success-bar span { display: block; height: 100%; width: 100%; background: var(--g-brand); transform-origin: left; animation: toastBar 2.6s linear forwards; }
+@keyframes toastBar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+/* ── Animations ───────────────────────────────────── */
+@keyframes apeFxSparkleFloat {
+  0%,100% { transform: translate3d(0,0,0) scale(.65); opacity:.18; }
+  35% { opacity:1; }
+  55% { transform:translate3d(var(--fx-dx,18px),var(--fx-dy,-28px),0) scale(1.35); opacity:.82; }
+  80% { opacity:.28; }
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .nerona-tools-grid { grid-template-columns: 1fr; }
+  .nerona-proxy-grid { grid-template-columns: 1fr; }
+  .tool-card { min-height: unset; }
+}
+
+@media (max-width: 760px) {
+  .nerona-tabs { padding: 6px 12px 0; }
+  .nerona-tab { padding: 8px 12px; font-size: 10px; }
+  body { padding: 10px; }
+}
+
+/* ── Misc Utility ─────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ── FX Layer ─────────────────────────────────────── */
+.KIORAxAUTO-theme-effects-layer {
+  position: fixed !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+  opacity: var(--nerona-fx-opacity, .4);
+  contain: layout paint style;
+  transform: translateZ(0);
+}
+
+.KIORAxAUTO-theme-effects-layer .fx-item { position: absolute; pointer-events: none; will-change: transform, opacity; }
+
+.KIORAxAUTO-theme-effects-layer.fx-sparkles .fx-item,
+.KIORAxAUTO-theme-effects-layer.fx-glitter .fx-item {
+  width: 4px; height: 4px; border-radius: 999px;
+  background: radial-gradient(circle, rgba(255,255,255,.98), var(--nerona-theme-accent, #8b5cf6) 40%, transparent 76%);
+  box-shadow: 0 0 10px var(--nerona-theme-glow, rgba(139, 92, 246, .35));
+  animation: apeFxSparkleFloat var(--fx-speed, 7s) ease-in-out infinite;
+}
+
+  </style>
+</head>
+<body>
+  <div id="mainContent" class="main-content">
+    <div class="wrap">
+      <div class="head">
+        <div class="brand">
+          <img src="icons/icon16.png" alt="">
+          <span>KIORAxAUTO</span>
+        </div>
+        <div id="targetInfo" class="target">Resolving checkout tab...</div>
+      </div>
+
+      <div id="status" class="status">Loading panel...</div>
+
+      <div class="nerona-tabs" id="neronaPageTabs">
+        <div class="nerona-tab active" data-page="tools">Tools</div>
+        <div class="nerona-tab" data-page="proxy">Proxy</div>
+        <div class="nerona-tab" data-page="history">History</div>
+      </div>
+
+    <div id="pageTools" class="nerona-page active">
+      <div class="nerona-zone-title">Tools</div>
+
+      <div class="grid">
+      <section class="card" style="position:relative;overflow:visible">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+          <span style="font-size:16px">⚡</span>
+          <span style="background:linear-gradient(135deg,#8b5cf6,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;font-size:12px;letter-spacing:.5px">KIORAxAUTO</span>
+          <span style="margin-left:auto;font-size:10px;padding:1px 6px;border-radius:4px;background:rgba(0,229,255,0.1);color:#00e5ff;font-weight:700">BIN/CC</span>
+        </div>
+        <div class="mode">
+          <button id="modeBin" class="active" type="button">BIN</button>
+          <button id="modeCc" type="button">CC</button>
+        </div>
+
+        <div class="row" style="display:flex;gap:6px;align-items:stretch">
+          <input id="binCcInput" type="text" placeholder="Enter BIN digits" style="flex:1;min-width:0">
+          <button id="saveCloudBtn" class="btn" type="button" style="white-space:nowrap;padding:8px 10px;font-size:10px">Save Cloud</button>
+        </div>
+        <textarea id="binInput" style="display:none"></textarea>
+        <textarea id="ccInput" style="display:none"></textarea>
+
+        <div id="cloudSection">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;margin-bottom:4px">
+            <span style="color:#7e8aa8;font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase">Cloud BINs</span>
+            <span id="cloudCount" style="color:#64748b;font-size:9px"></span>
+          </div>
+          <div id="cloudBinList" style="max-height:140px;overflow:auto;margin-bottom:6px;border:1px solid rgba(0,255,255,0.08);border-radius:10px;padding:4px;background:rgba(10,15,30,0.4)">
+            <div style="color:#7e8aa8;font-size:11px;padding:4px">No cloud BINs saved.</div>
+          </div>
+        </div>
+
+        <div class="row" style="display:flex;gap:6px;margin-top:4px">
+          <button id="saveLocalBtn" class="btn" type="button" style="flex:1;font-size:10px">Save Local</button>
+        </div>
+
+        <div id="binInUseDisplay" style="margin-top:6px;padding:6px 8px;border-radius:8px;background:rgba(10,15,30,0.5);border:1px solid rgba(0,255,255,0.1);text-align:center">
+          <span style="color:#7e8aa8;font-size:10px">BIN IN USE</span> <span style="color:#64748b;font-size:11px">none</span>
+        </div>
+        <div id="stripeBypassBanner" style="display:none;margin-top:8px;padding:8px 10px;border-radius:8px;background:linear-gradient(135deg,rgba(139,92,246,0.18),rgba(236,72,153,0.12));border:1px solid rgba(192,132,252,0.35);text-align:center;animation:apeFxSparkleFloat 0.6s ease-out">
+          <span style="background:linear-gradient(135deg,#a78bfa,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:11px;font-weight:900;letter-spacing:0.5px;text-transform:uppercase">STRIPE 3DS BYPASS</span>
+          <span style="color:#c4b5fd;font-size:10px;display:block;margin-top:2px">Active on checkout pages</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Logs</h3>
+        <div id="logList" class="log-list" style="max-height:200px">
+          <div class="log-item">No logs yet.</div>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <button id="clearLogsBtn" class="btn btn-alt" type="button">Clear Logs</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Telegram</h3>
+        <div class="row">
+          <input id="tgBotToken" type="password" placeholder="Bot token from BotFather" autocomplete="off">
+        </div>
+        <div class="row">
+          <input id="tgChatId" type="text" placeholder="Group Chat ID (e.g. -1001234567890)" autocomplete="off">
+        </div>
+        <div class="row">
+          <input id="tgChannelId" type="text" placeholder="Channel ID (e.g. -1001234567891)" autocomplete="off">
+        </div>
+        <div class="row">
+          <div id="tgState" class="target">Telegram alerts are off until you save your own bot token and chat ID.</div>
+        </div>
+        <div class="switch-row">
+          <label for="tgUserSsToggle">Enable Telegram Alerts</label>
+          <label class="ios-toggle"><input id="tgUserSsToggle" type="checkbox" data-toggle="tgUserSs"><span class="ios-slider"></span></label>
+        </div>
+        <div class="row">
+          <button id="tgTestBtn" class="btn btn-alt" type="button">Send Test</button>
+          <button id="tgSaveBtn" class="btn" type="button">Save Telegram</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Settings</h3>
+        <div class="row">
+          <input id="nameInput" type="text" placeholder="Name">
+        </div>
+        <div class="row">
+          <input id="emailInput" type="text" placeholder="Email">
+        </div>
+
+        <div class="switch-row">
+          <label for="hitSoundToggle">Hit Sound</label>
+          <label class="ios-toggle"><input id="hitSoundToggle" type="checkbox" data-toggle="hitSound"><span class="ios-slider"></span></label>
+        </div>
+        <div class="switch-row">
+          <label for="autoSsToggle">Auto Screenshot</label>
+          <label class="ios-toggle"><input id="autoSsToggle" type="checkbox" data-toggle="autoSS" checked><span class="ios-slider"></span></label>
+        </div>
+        <div class="switch-row">
+          <label for="blurEmailToggle">Blur Email on Stripe</label>
+          <label class="ios-toggle"><input id="blurEmailToggle" type="checkbox" data-toggle="blurEmail"><span class="ios-slider"></span></label>
+        </div>
+        <div class="switch-row">
+          <label for="bypass3dsToggle">3DS Bypass (Relay)</label>
+          <label class="ios-toggle"><input id="bypass3dsToggle" type="checkbox" data-toggle="bypass3ds" checked><span class="ios-slider"></span></label>
+        </div>
+        <div class="switch-row">
+          <label for="gatewaySkipToggle">Payment Gateway Skip</label>
+          <label class="ios-toggle"><input id="gatewaySkipToggle" type="checkbox" data-toggle="gatewaySkip"><span class="ios-slider"></span></label>
+        </div>
+        <div class="switch-row">
+          <label for="fxToggle">Hit Effects</label>
+          <label class="ios-toggle"><input id="fxToggle" type="checkbox" data-toggle="fx" checked><span class="ios-slider"></span></label>
+        </div>
+        <div class="switch-row" style="margin-top:6px">
+          <label for="addressModeSelect">Address Autofill</label>
+          <select id="addressModeSelect" style="width: 140px">
+            <option value="auto">Auto</option>
+            <option value="keep_country">Keep Current Country</option>
+          </select>
+        </div>
+
+        <div style="margin-top:12px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Theme</div>
+          <div class="theme-row">
+            <button id="themeDefault" class="btn btn-alt" type="button" style="font-size:11px;padding:6px 12px">Default</button>
+            <button id="themeNarutox" class="btn btn-alt" type="button" style="font-size:11px;padding:6px 12px">NarutoX</button>
+            <button id="themeLiquid" class="btn btn-alt" type="button" style="font-size:11px;padding:6px 12px">Liquid</button>
+            <button id="themeBlur" class="btn btn-alt" type="button" style="font-size:11px;padding:6px 12px">Blur</button>
+          </div>
+          <div class="theme-row" style="margin-top:8px">
+            <button id="resetThemeBtn" class="btn btn-alt" type="button" style="font-size:11px;padding:6px 12px">Reset Theme</button>
+          </div>
+          <div id="themeStatus">No theme selected</div>
+        </div>
+
+        <div style="margin-top:10px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Accent Color</div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="accentColor1" type="color" value="#00c896" style="width:32px;height:32px;border:2px solid var(--line);border-radius:8px;cursor:pointer;background:transparent">
+            <input id="accentColor2" type="color" value="#6366f1" style="width:32px;height:32px;border:2px solid var(--line);border-radius:8px;cursor:pointer;background:transparent">
+            <span style="font-size:10px;color:var(--muted)">Primary / Secondary</span>
+          </div>
+        </div>
+
+        <div style="margin-top:10px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Effects</div>
+          <div class="fx-control-grid">
+            <select id="fxType">
+              <option value="sparkles">Sparkles</option>
+              <option value="glitter">Glitter</option>
+              <option value="bubbles">Bubbles</option>
+              <option value="lightning">Lightning</option>
+            </select>
+            <select id="fxPower">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div id="fxStatus">Effects off</div>
+        </div>
+
+        <div class="gateway-status">
+          <span>Gateway:</span>
+          <span id="gatewayBadge" class="badge">Detecting...</span>
+          <span id="gatewayName">—</span>
+        </div>
+
+        <div class="row" style="margin-top:12px">
+          <button id="saveSettingsBtn" class="btn" type="button">Save Settings</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Captcha Solver</h3>
+        <div class="row">
+          <select id="captchaProviderSelect">
+            <option value="">-- Disabled --</option>
+            <option value="2captcha">2Captcha</option>
+            <option value="capsolver">Capsolver</option>
+            <option value="anticaptcha">Anti-Captcha</option>
+            <option value="capmonster">CapMonster Cloud</option>
+            <option value="custom">Custom Endpoint</option>
+          </select>
+        </div>
+        <div class="row">
+          <input id="captchaApiKeyInput" type="password" placeholder="API Key">
+        </div>
+        <div class="row hidden" id="customEndpointRow">
+          <input id="captchaCustomEndpoint" type="text" placeholder="Custom API URL (e.g. https://your-solver.com)">
+        </div>
+        <div class="row">
+          <div id="captchaState" class="target">Status: Not configured</div>
+        </div>
+        <div class="row">
+          <button id="captchaSaveBtn" class="btn" type="button">Save Captcha Config</button>
+          <button id="captchaTestBtn" class="btn btn-alt" type="button">Test API Key</button>
+        </div>
+      </section>
+    </div>
+
+
+    </div>
+
+    <div id="pageProxy" class="nerona-page">
+    <section class="nerona-tools-panel" id="neronaProxyPanel">
+      <div class="nerona-tools-title-row">
+        <div>
+          <div class="nerona-tools-title">KIORAxAUTO Proxy Manager</div>
+          <div class="nerona-tools-note">Paste proxy, connect it to Chrome, test current IP, and show status on the checkout page.</div>
+        </div>
+        <span class="nerona-version-pill">v5 proxy</span>
+      </div>
+
+      <div class="nerona-tools-grid nerona-proxy-grid">
+        <section class="tool-card nerona-proxy-card" id="proxyManagerCard">
+          <h3>Proxy <span class="tool-pill">Live</span></h3>
+          <div class="tool-mini-note">Format: host:port:user:pass. Use activates the proxy, Disconnect deactivates it.</div>
+          <div class="tool-field">
+            <label for="proxyValueInput">Proxy</label>
+            <input id="proxyValueInput" type="password" placeholder="host:port:user:pass" autocomplete="off">
+          </div>
+          <div class="tool-actions">
+            <button id="useProxyBtn" class="btn" type="button">Use</button>
+            <button id="clearProxyBtn" class="btn btn-alt" type="button">Disconnect</button>
+          </div>
+          <div class="tool-actions single">
+            <button id="detectIpBtn" class="btn btn-alt" type="button">Detect Current IP</button>
+          </div>
+          <div id="proxyStatusBox" class="nerona-live-status">
+            <div class="nerona-live-row"><span>Status</span><strong id="proxyLiveStatus">Not Set</strong></div>
+            <div class="nerona-live-row"><span>Current IP</span><strong id="proxyLiveIp">--</strong></div>
+            <div class="nerona-live-row"><span>Proxy Host</span><strong id="proxyLiveHost">--</strong></div>
+            <div class="nerona-live-row"><span>Last Check</span><strong id="proxyLiveTime">--</strong></div>
+          </div>
+          <pre id="proxyToolResult" class="tool-result">Proxy manager ready. Paste proxy and click Connect & Test.</pre>
+        </section>
+
+        <section class="tool-card nerona-proxy-help-card">
+          <h3>Checkout Page IP Card <span class="tool-pill">UI</span></h3>
+          <div class="tool-mini-note">The small bottom-left KIORAxAUTO card on checkout pages shows your current IP and proxy status after connect/test.</div>
+          <div class="nerona-live-status">
+            <div class="nerona-live-row"><span>Side UI</span><strong>Enabled</strong></div>
+            <div class="nerona-live-row"><span>Rail</span><strong>K i o r a A u t o X</strong></div>
+            <div class="nerona-live-row"><span>Start Button</span><strong>Bottom-right</strong></div>
+          </div>
+          <pre class="tool-result">Removed the old endpoint-only tools. This version focuses on real proxy connect + current IP display.</pre>
+        </section>
+      </div>
+
+      <div class="nerona-tools-title-row" style="margin-top:14px">
+        <div>
+          <div class="nerona-tools-title">Proxy List & Rotation</div>
+          <div class="nerona-tools-note">Save a list of proxies for automatic rotation. One proxy per line: host:port:user:pass</div>
+        </div>
+        <span class="nerona-version-pill">rotation</span>
+      </div>
+      <div class="nerona-tools-grid" style="grid-template-columns:1fr">
+        <section class="tool-card">
+          <div class="tool-field">
+            <label for="proxyListInput">Proxy List</label>
+            <textarea id="proxyListInput" placeholder="host:port:user:pass&#10;host2:port2:user2:pass2" style="min-height:60px"></textarea>
+          </div>
+          <div class="tool-actions">
+            <button id="saveProxyListBtn" class="btn" type="button">Save Proxy List</button>
+            <button id="useProxyListBtn" class="btn" type="button">Use</button>
+            <button id="disconnectProxyListBtn" class="btn btn-alt" type="button">Disconnect</button>
+          </div>
+          <div class="tool-actions" style="margin-top:6px">
+            <button id="rotateProxyBtn" class="btn btn-alt" type="button">Rotate to Next</button>
+            <button id="clearProxyListBtn" class="btn btn-alt" type="button" style="border-color:#d32f2f;color:#d32f2f">Clear List</button>
+          </div>
+          <div id="proxyListContainer" class="tool-result" style="min-height:36px;padding:6px 8px"></div>
+          <div id="proxyListStatus" style="font-size:11px;color:#888;padding:4px 0 0">Proxy list: 0 saved.</div>
+        </section>
+      </div>
+
+      <div class="nerona-tools-title-row" style="margin-top:14px">
+        <div>
+          <div class="nerona-tools-title">Fraud Score Check</div>
+          <div class="nerona-tools-note">Check fraud score for the current proxy IP.</div>
+        </div>
+        <span class="nerona-version-pill">v1</span>
+      </div>
+      <div class="nerona-tools-grid" style="grid-template-columns:1fr">
+        <section class="tool-card">
+          <div class="tool-field">
+            <label for="fraudProviderSelect">Fraud Provider</label>
+            <select id="fraudProviderSelect">
+              <option value="scamalytics" selected>Scamalytics</option>
+              <option value="getipintel">GetIPIntel</option>
+            </select>
+          </div>
+          <div class="tool-field">
+            <label for="fraudUserInput">Scamalytics User ID</label>
+            <input id="fraudUserInput" type="text" placeholder="e.g. 6a09304eea73b" autocomplete="off">
+          </div>
+          <div class="tool-field">
+            <label for="fraudApiKeyInput">API Key</label>
+            <input id="fraudApiKeyInput" type="password" placeholder="Enter your API key (optional)" autocomplete="off">
+          </div>
+          <div class="tool-mini-note">Uses the selected provider to check proxy/VPN risk. Leave blank for Scamalytics defaults.</div>
+          <div class="tool-actions single">
+            <button id="checkFraudBtn" class="btn" type="button">Check Fraud Score</button>
+          </div>
+          <div id="fraudInfoBox" class="nerona-live-status" style="display:none">
+            <div id="fraudResult" style="font-size:12px;padding:4px 0">Click Check to test.</div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    </div>
+
+    <div id="pageHistory" class="nerona-page">
+      <div class="nerona-zone-title">Hit History</div>
+      <div id="historyList" class="log-list" style="max-height:300px;padding:0 16px 12px;font-size:11px">
+        <div class="log-item" style="color:#94a3b8">No hits yet.</div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <button id="startBtn" class="btn start-btn" type="button">Start</button>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;padding:8px 0;border-top:1px solid rgba(255,255,255,0.06);margin-top:8px">
+      <button id="exportSettingsBtn" class="btn btn-alt" type="button" style="font-size:11px;padding:4px 12px">Export Settings</button>
+      <button id="importSettingsBtn" class="btn btn-alt" type="button" style="font-size:11px;padding:4px 12px">Import Settings</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="script/gateway-detector.js"></script>
+<script src="script/gateway-handlers.js"></script>
+<script src="script/panel-load-init.js"></script>
+<script src="script/ios-toggle-wiring.js"></script>
+<script src="script/theme-panel.js"></script>
+<script src="script/panel-gateway-status.js"></script>
+<script src="script/panel-nav.js"></script>
+<script src="script/panel-app.js"></script>
+<script src="script/panel-log-refresh.js"></script>
+<script src="script/panel-telegram.js"></script>
+<script src="script/panel-bincc.js"></script>
+<script src="script/kiora-tools.js"></script>
+<script src="script/captcha-panel.js"></script>
+<script src="script/panel-history.js"></script>
+</body>
+</html>
